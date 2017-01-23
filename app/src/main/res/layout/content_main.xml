@@ -13,8 +13,122 @@
     tools:context="com.example.sdj.firstapp.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingTop="24dp"
+        android:layout_marginTop="83dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:text="Age"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:id="@+id/textView3"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:inputType="textPersonName"
+            android:text="Enter Age here"
+            android:ems="10"
+            android:id="@+id/editText3"
+            android:layout_marginRight="18dp"
+            android:layout_weight="0.91"
+            android:layout_marginEnd="18dp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:text="Name"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:id="@+id/textView2"
+
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:inputType="textPersonName"
+            android:text="Enter Name here"
+            android:ems="10"
+            android:id="@+id/editText2"
+            android:layout_marginRight="18dp"
+            android:layout_weight="2"
+            android:layout_marginEnd="18dp"
+             />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingTop="24dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:text="ID"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:id="@+id/textView4"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:inputType="textPersonName"
+            android:text="Enter ID here"
+            android:ems="10"
+            android:id="@+id/editText4"
+            android:layout_marginRight="18dp"
+            android:layout_weight="0.71"
+            android:layout_marginEnd="18dp"
+            />
+
+
+    </LinearLayout>
+
+    <Button
+        android:text="View Heartbeat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/buttonInput"
+        android:layout_weight="1"
+        android:layout_marginBottom="63dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.sdj.firstapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,14 +22,43 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button mButton = (Button) findViewById(R.id.buttonInput);
+
+
+        mButton.setOnClickListener(
+
+                new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View view){
+                EditText nameBox = (EditText) findViewById(R.id.editText2);
+                EditText ageBox = (EditText) findViewById(R.id.editText3);
+                EditText idBox = (EditText) findViewById(R.id.editText4);
+
+                final String name = nameBox.getText().toString();
+                final String age = ageBox.getText().toString();
+                final String id = idBox.getText().toString();
+                if (name.equals("")  || id.equals("")  || age.equals("") )
+                {
+                    Toast.makeText(MainActivity.this,"Please enter all fields",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                try
+                {
+                    int ageNum = Integer.valueOf(age);
+                }
+                catch (NumberFormatException e)
+                {
+                    Toast.makeText(MainActivity.this,"Age should be a number!",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent myIntent = new Intent(MainActivity.this,BeatDisplay.class);
+                myIntent.putExtra("name",name);
+                myIntent.putExtra("age",age);
+                myIntent.putExtra("id",id);
+                startActivity(myIntent);
             }
-        });
+        }
+        );
     }
 
     @Override
