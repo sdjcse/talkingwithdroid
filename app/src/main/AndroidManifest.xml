@@ -20,7 +20,6 @@
         </activity>
         <activity
             android:name=".BeatDisplay"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_beat_display"
             android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme"></activity>
