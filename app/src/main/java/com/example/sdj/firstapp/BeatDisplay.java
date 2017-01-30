@@ -2,6 +2,7 @@ package com.example.sdj.firstapp;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -30,7 +31,11 @@ public class BeatDisplay extends Activity {
 
     private Button runButton;
     private Button stopButton;
+    private boolean stopIt = false;
     private Thread keyThread;
+    private GraphView gv;
+    private Viewport vp;
+    private boolean firstStart = true;
 
     private float[] randList(int n){
         float retArr [] = new float[n];
@@ -51,10 +56,9 @@ public class BeatDisplay extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_beat_display);
-        GraphView gv = (GraphView) findViewById(R.id.graph);
+        gv = (GraphView) findViewById(R.id.graph);
         values = new LineGraphSeries<DataPoint>();
-        gv.addSeries(values);
-        Viewport vp = gv.getViewport();
+        vp = gv.getViewport();
         vp.setYAxisBoundsManual(true);
         vp.setMinY(0);
         vp.setMaxY(10);
@@ -64,25 +68,24 @@ public class BeatDisplay extends Activity {
 
         this.runListener();
         this.stopListener();
-        new Thread(new Runnable() {
+        keyThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i=0;i<100;i++){
+                for (int i=0;!stopIt;i++){
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             appendValues();
                         }
                     });
-
                     try {
                         Thread.sleep(300);
                     }catch (InterruptedException e){
-                        System.out.println("Caught an Exception!"+ e);
+                        Log.d("Interrupted",e.toString());
                     }
                 }
             }
-        }).start();
+        });
 
     }
 
@@ -92,8 +95,33 @@ public class BeatDisplay extends Activity {
         runButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(BeatDisplay.this,"Run Pressed"+counter,Toast.LENGTH_SHORT).show();
-                //keyThread.start();
+                stopIt = false;
+                if(gv.getSeries().isEmpty())
+                {
+                    gv.addSeries(values);
+                    Toast.makeText(BeatDisplay.this,keyThread.getState().toString(),Toast.LENGTH_SHORT).show();
+                    keyThread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (int i=0;!stopIt;i++){
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        appendValues();
+                                    }
+                                });
+                                try {
+                                    Thread.sleep(300);
+                                }catch (InterruptedException e){
+                                    Log.d("Interrupted",e.toString());
+                                }
+                            }
+                        }
+                    });
+                    keyThread.start();
+                }else {
+                    return;
+                }
             }
         });
     }
@@ -103,14 +131,15 @@ public class BeatDisplay extends Activity {
         stopButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //keyThread.interrupt();
+                stopIt = true;
+                gv.removeAllSeries();
             }
         });
     }
 
     private void appendValues(){
         float fl = new Random().nextFloat() * (10f);
-        values.appendData(new DataPoint(counter++, fl),false,20);
+        values.appendData(new DataPoint(counter++, fl),false,10);
     }
 
 }

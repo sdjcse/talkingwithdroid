@@ -39,11 +39,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:inputType="textPersonName"
-            android:text="12"
+            android:text=""
             android:ems="10"
             android:id="@+id/editText3"
             android:layout_marginRight="18dp"
-            android:layout_weight="0.91"
+            android:layout_weight="1"
             android:layout_marginEnd="18dp" />
 
 
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:inputType="textPersonName"
-            android:text="Enter Name here"
+            android:text=""
             android:ems="10"
             android:id="@+id/editText2"
             android:layout_marginRight="18dp"
@@ -85,15 +85,25 @@
 
     </LinearLayout>
 
+
+    <Button
+        android:text="View Heartbeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonInput"
+        android:layout_weight="1"
+        android:layout_marginBottom="63dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
         android:paddingBottom="20dp"
         android:paddingTop="24dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:id="@+id/lastLayout"
+        android:layout_centerVertical="true">
 
         <TextView
             android:text="ID"
@@ -110,25 +120,44 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:inputType="textPersonName"
-            android:text="Enter ID here"
+            android:text=""
             android:ems="10"
             android:id="@+id/editText4"
             android:layout_marginRight="18dp"
-            android:layout_weight="0.71"
             android:layout_marginEnd="18dp"
+            android:layout_weight="1"
             />
 
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignBottom="@id/lastLayout"
 
-    <Button
-        android:text="View Heartbeat"
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_height="wrap_content"></LinearLayout>
+
+    <RadioGroup
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonInput"
-        android:layout_weight="1"
-        android:layout_marginBottom="63dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:orientation="horizontal"
+        android:layout_marginBottom="19dp"
+        android:layout_above="@+id/buttonInput"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
+        <RadioButton android:id="@+id/radio_pirates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:onClick="onRadioButtonClicked"
+            android:layout_weight="0.38" />
+
+        <RadioButton android:id="@+id/radio_ninjas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
 
 </RelativeLayout>
