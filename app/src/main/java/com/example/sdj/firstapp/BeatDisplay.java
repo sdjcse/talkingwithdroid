@@ -99,7 +99,6 @@ public class BeatDisplay extends Activity {
                 if(gv.getSeries().isEmpty())
                 {
                     gv.addSeries(values);
-                    Toast.makeText(BeatDisplay.this,keyThread.getState().toString(),Toast.LENGTH_SHORT).show();
                     keyThread = new Thread(new Runnable() {
                         @Override
                         public void run() {
