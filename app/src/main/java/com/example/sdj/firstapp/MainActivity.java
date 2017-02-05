@@ -1,14 +1,15 @@
 package com.example.sdj.firstapp;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,48 +18,45 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        Button mButton = (Button) findViewById(R.id.buttonInput);
+        Button mButton = (Button) findViewById(R.id.start);
 
+        mButton.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View view) {
+                                           EditText nameBox = (EditText) findViewById(R.id.inputname);
+                                           EditText ageBox = (EditText) findViewById(R.id.inputage);
+                                           EditText idBox = (EditText) findViewById(R.id.inputpatid);
+                                           // gender = ((RadioButton)findViewById(R.id.male)).getCheckedRadioButtonId() ;
 
-        mButton.setOnClickListener(
-
-                new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                EditText nameBox = (EditText) findViewById(R.id.editText2);
-                EditText ageBox = (EditText) findViewById(R.id.editText3);
-                EditText idBox = (EditText) findViewById(R.id.editText4);
-
-                final String name = nameBox.getText().toString();
-                final String age = ageBox.getText().toString();
-                final String id = idBox.getText().toString();
-                if (name.equals("")  || id.equals("")  || age.equals("") )
-                {
-                    Toast.makeText(MainActivity.this,"Please enter all fields",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                try
-                {
-                    int ageNum = Integer.valueOf(age);
-                }
-                catch (NumberFormatException e)
-                {
-                    Toast.makeText(MainActivity.this,"Age should be a number!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Intent myIntent = new Intent(MainActivity.this,BeatDisplay.class);
-                myIntent.putExtra("name",name);
-                myIntent.putExtra("age",age);
-                myIntent.putExtra("id",id);
-                startActivity(myIntent);
-            }
-        }
+                                           final String name = nameBox.getText().toString();
+                                           final String age = ageBox.getText().toString();
+                                           final String id = idBox.getText().toString();
+                                           if (name.equals("") || id.equals("") || age.equals("")) {
+                                               Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                                               return;
+                                           }
+                                           Intent myIntent = new Intent(MainActivity.this, BeatDisplay.class);
+                                           myIntent.putExtra("name", name);
+                                           myIntent.putExtra("age", age);
+                                           myIntent.putExtra("id", id);
+                                           String gen = "";
+                                           RadioButton str = (RadioButton) findViewById(R.id.male);
+                                           Boolean value = str.isChecked();
+                                           if(value == true)
+                                           {
+                                               gen = "M";
+                                           }
+                                           else
+                                           {
+                                               gen = "F";
+                                           }
+                                           myIntent.putExtra("sex",gen);
+                                           startActivity(myIntent);
+                                       }
+                                   }
         );
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -77,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
